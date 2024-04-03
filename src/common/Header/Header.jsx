@@ -1,11 +1,14 @@
 import "./Header.css";
+import { useState } from "react";
 import { CLink } from "../CLink/CLink";
 
 //RDX
 
 import { useSelector, useDispatch } from "react-redux";
 import { userData, logout } from "../../app/slices/userSlice";
+import { updateCriteria } from "../../app/slices/searchSlice";
 import { useEffect } from "react";
+import { CInput } from "../CInput/CInput";
 
 export const Header = () => {
   //Instancia de conexion a modo lectura
@@ -17,8 +20,28 @@ export const Header = () => {
   useEffect(() => {
     console.log(rdxUser, " credenciales pasaporte");
   }, [rdxUser]);
+
+  const [criteria, setCriteria] = useState("")
+
+  const searchHandler = (e) => {
+    setCriteria(e.target.value)
+  }
+
+  useEffect(()=>{
+    if(criteria !== ""){
+      //guardo en redux.....
+      dispatch(updateCriteria(criteria))
+    }
+  }, [criteria])
+
   return (
     <div className="header-design">
+      <CInput 
+        type="text"
+        name="criteria"
+        value={criteria || ""}
+        changeEmit={searchHandler}
+      />
       <CLink path="/" title="Home" />
       {rdxUser?.credentials?.token ? (
         <div className="navigator-design">
