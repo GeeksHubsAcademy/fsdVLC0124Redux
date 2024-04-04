@@ -21,22 +21,20 @@ export const Header = () => {
     console.log(rdxUser, " credenciales pasaporte");
   }, [rdxUser]);
 
-  const [criteria, setCriteria] = useState("")
+  const [criteria, setCriteria] = useState("");
 
   const searchHandler = (e) => {
-    setCriteria(e.target.value)
-  }
+    setCriteria(e.target.value);
+  };
 
-  useEffect(()=>{
-    if(criteria !== ""){
-      //guardo en redux.....
-      dispatch(updateCriteria(criteria))
-    }
-  }, [criteria])
+  useEffect(() => {
+    dispatch(updateCriteria(criteria));
+    console.log("primo")
+  }, [criteria]);
 
   return (
     <div className="header-design">
-      <CInput 
+      <CInput
         type="text"
         name="criteria"
         value={criteria || ""}
