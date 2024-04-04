@@ -1,5 +1,8 @@
+const root = "http://localhost:4000/api/";
+const rootTMDB = "https://api.themoviedb.org/3/";
+const apiKey = "210d6a5dd3f16419ce349c9f1b200d6d";
 
-const root = "http://localhost:4000/api/"
+import axios from 'axios';
 
 export const loginService = async (user) => {
   const options = {
@@ -20,6 +23,18 @@ export const loginService = async (user) => {
     }
 
     return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const searchFilms = async (criteria) => {
+
+
+  try {
+    const response = await axios.get(`${rootTMDB}search/movie?api_key=${apiKey}&language=en-US&query=${criteria}&page=1&include_adult=false`);
+
+    return response;
   } catch (error) {
     return error;
   }

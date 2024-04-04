@@ -10,3 +10,17 @@
     justify-content: center;
     align-items: center;
 }
+
+.carlosManda {
+
+    height: 10em;
+    margin: 1em;
+    
+}
+
+.videoclub {
+
+    display: flex;
+    flex-direction: row;
+
+}
