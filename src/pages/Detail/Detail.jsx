@@ -3,16 +3,18 @@ import "./Detail.css";
 import { useSelector } from "react-redux";
 import { detailData } from "../../app/slices/detailSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Detail = () => {
+  const detailRdx = useSelector(detailData);
+  const navigate = useNavigate();
 
-    const detailRdx = useSelector(detailData)
+  useEffect(() => {
+    if (!detailRdx?.peli?.id) {
+      navigate("/");
+    }
+  }, [detailRdx]);
 
-    useEffect(()=> {
-        console.log(detailRdx)
-    }, [detailRdx])
-
-    return (
-        <div>{detailRdx.peli.original_title}</div>
-    )
-}
+  //Renderizado condicional &&
+  return <div>{detailRdx?.peli?.id && detailRdx.peli.original_title}</div>;
+};
