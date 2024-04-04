@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
+import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { thunk } from "redux-thunk";
 
 import storage from "redux-persist/lib/storage";
@@ -19,7 +20,31 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
+  transforms: [
+    encryptTransform({
+      secretKey: 'saltamontes',
+      onError: function (error) {
+        // Handle the error.
+      },
+    }),
+  ],
 };
+
+/* 
+const reducer = persistReducer(
+  {
+    transforms: [
+      encryptTransform({
+        secretKey: 'my-super-secret-key',
+        onError: function (error) {
+          // Handle the error.
+        },
+      }),
+    ],
+  },
+  baseReducer
+);
+*/
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
