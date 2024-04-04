@@ -4,6 +4,13 @@ const apiKey = "210d6a5dd3f16419ce349c9f1b200d6d";
 
 import axios from "axios";
 
+//Conexión a RDX en modo escritura
+
+import { useDispatch } from "react-redux";
+import { logout } from "../app/slices/userSlice";
+
+const dispatch = useDispatch();
+
 export const loginService = async (user) => {
   const options = {
     method: "POST",
@@ -20,6 +27,41 @@ export const loginService = async (user) => {
 
     if (!data.success) {
       throw new Error(data.message);
+    }
+
+    //SI NECESITASE TOKEN
+    if(data.message === "Token Error"){
+      dispatch(logout({ credentials: "" }))
+    }
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const userProfile = async (token) => {
+  //PLACEHOLDER FUNCION
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  };
+
+  try {
+    const response = await fetch(`${root}auth/login`, options);
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+
+    //SI NECESITASE TOKEN
+    if(data.message === "Token Error"){
+      dispatch(logout({ credentials: "" }))
     }
 
     return data;
