@@ -33,36 +33,6 @@ export const loginService = async (user) => {
   }
 };
 
-// export const userProfile = async (token) => {
-//   //PLACEHOLDER FUNCION
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(user),
-//   };
-
-//   try {
-//     const response = await fetch(`${root}auth/login`, options);
-
-//     const data = await response.json();
-
-//     if (!data.success) {
-//       throw new Error(data.message);
-//     }
-
-//     //SI NECESITASE TOKEN
-//     if(data.message === "Token Error"){
-//       dispatch(logout({ credentials: "" }))
-//     }
-
-//     return data;
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
 export const searchFilms = async (criteria) => {
   try {
     const response = await axios.get(
@@ -82,6 +52,34 @@ export const popularFilms = async () => {
     );
 
     return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const uploadFile = async (file) => {
+  const formData = new FormData()
+  formData.append("photo",file)
+
+  const options = {
+    method: "POST",
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: formData
+  };
+
+
+  try {
+    const response = await fetch(`${root}files/upload`, options);
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+
+    return data;
   } catch (error) {
     return error;
   }

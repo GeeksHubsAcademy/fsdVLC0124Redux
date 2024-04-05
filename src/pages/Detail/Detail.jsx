@@ -16,5 +16,5 @@ export const Detail = () => {
   }, [detailRdx]);
 
   //Renderizado condicional &&
-  return <div>{detailRdx?.peli?.id && detailRdx.peli.original_title}</div>;
+  return <div className="detail-design">{detailRdx?.peli?.id && detailRdx.peli.original_title}</div>;
 };
