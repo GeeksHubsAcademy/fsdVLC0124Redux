@@ -19,6 +19,7 @@ export const Home = () => {
   const rootPath = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    
     const bringMovies = async () => {
       let fetched;
       if (searchRdx.criteria !== "") {

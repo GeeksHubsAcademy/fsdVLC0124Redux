@@ -28,8 +28,11 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    dispatch(updateCriteria(criteria));
-    console.log("primo")
+    const searching = setTimeout(() => {
+      dispatch(updateCriteria(criteria));
+    }, 375);
+
+    return () => clearTimeout(searching);
   }, [criteria]);
 
   return (
